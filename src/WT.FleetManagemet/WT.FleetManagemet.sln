@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.MobileWebService", "WT.MobileWebService\WT.MobileWebService.csproj", "{97CA1019-43E7-472C-9853-392C1293D1B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97CA1019-43E7-472C-9853-392C1293D1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CA1019-43E7-472C-9853-392C1293D1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CA1019-43E7-472C-9853-392C1293D1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CA1019-43E7-472C-9853-392C1293D1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {165D0A9F-4DA9-411B-BC8E-2D0A9CDBCDD5}
+	EndGlobalSection
+EndGlobal
