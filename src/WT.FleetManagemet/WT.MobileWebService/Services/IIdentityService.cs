@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WT.MobileWebService.Domain;
 
 namespace WT.MobileWebService.Services
@@ -9,5 +6,6 @@ namespace WT.MobileWebService.Services
     public interface IIdentityService
     {
         Task<AuthenticationResult> RegisterAsync(string email, string password);
+        Task<AuthenticationResult> LoginAsync(string email, string password);
     }
 }

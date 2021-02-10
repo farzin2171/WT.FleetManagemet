@@ -35,6 +35,7 @@ namespace WT.MobileWebService.Installers
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.Secret)),
                     ValidateIssuer = false,
+                    ValidateAudience = false,
                     RequireExpirationTime = false,
                     ValidateLifetime = true
                 };

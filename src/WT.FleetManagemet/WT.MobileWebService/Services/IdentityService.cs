@@ -21,6 +21,29 @@ namespace WT.MobileWebService.Services
             _userManager = userManager;
             _jwtOptions = jwtOptions;
         }
+
+        public async Task<AuthenticationResult> LoginAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return new AuthenticationResult
+                {
+                    Errors = new[] { "User does not exist" }
+                };
+            };
+
+            var userHasValidPassword = await _userManager.CheckPasswordAsync(user, password);
+            if(!userHasValidPassword)
+            {
+                return new AuthenticationResult
+                {
+                    Errors = new[] { "user is not allowed to log in" }
+                };
+            }
+            return GeneratAuthenticationResult(user);
+        }
+
         public async Task<AuthenticationResult> RegisterAsync(string email, string password)
         {
             var exisingUser = await _userManager.FindByEmailAsync(email);
@@ -32,8 +55,10 @@ namespace WT.MobileWebService.Services
                 };
             };
 
+            var newUserId = Guid.NewGuid();
             var newUser = new IdentityUser
             {
+                Id=newUserId.ToString(),
                 Email = email,
                 UserName = email
             };
@@ -47,6 +72,11 @@ namespace WT.MobileWebService.Services
                 };
             }
 
+            return GeneratAuthenticationResult(newUser);
+        }
+
+        private AuthenticationResult GeneratAuthenticationResult(IdentityUser newUser)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -58,8 +88,8 @@ namespace WT.MobileWebService.Services
                     new Claim(JwtRegisteredClaimNames.Email,newUser.Email),
                     new Claim("id",newUser.Id)
                 }),
-                Expires=DateTime.UtcNow.AddHours(2),
-                SigningCredentials=new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.AddHours(2),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -69,10 +99,6 @@ namespace WT.MobileWebService.Services
                 Success = true,
                 Token = tokenHandler.WriteToken(token)
             };
-
         }
-
-            
-        
     }
 }
