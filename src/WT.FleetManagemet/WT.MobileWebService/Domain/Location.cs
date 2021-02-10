@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WT.MobileWebService.Domain
 {
@@ -9,6 +10,7 @@ namespace WT.MobileWebService.Domain
             IsTransfered = false;
             RecivedDate = DateTime.UtcNow;
         }
+        [Key]
         public Guid Id { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }

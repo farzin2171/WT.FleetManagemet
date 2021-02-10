@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WT.MobileWebService.Domain;
 
 namespace WT.MobileWebService.Data
 {
@@ -12,5 +13,7 @@ namespace WT.MobileWebService.Data
             : base(options)
         {
         }
+
+        public DbSet<Location> Locations { get; set; }
     }
 }

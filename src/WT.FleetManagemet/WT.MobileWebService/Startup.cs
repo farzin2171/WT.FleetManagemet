@@ -38,6 +38,11 @@ namespace WT.MobileWebService
                 app.UseHsts();
             }
 
+            app.UseRouting();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseAuthentication();
+
             var swaggerOptions = new Options.SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
             app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
@@ -47,9 +52,7 @@ namespace WT.MobileWebService
             });
 
 
-            app.UseRouting();
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+          
 
             app.UseEndpoints(endpoints =>
             {
