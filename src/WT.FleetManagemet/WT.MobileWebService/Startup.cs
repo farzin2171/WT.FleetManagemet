@@ -41,6 +41,7 @@ namespace WT.MobileWebService
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthorization();
             app.UseAuthentication();
 
             var swaggerOptions = new Options.SwaggerOptions();

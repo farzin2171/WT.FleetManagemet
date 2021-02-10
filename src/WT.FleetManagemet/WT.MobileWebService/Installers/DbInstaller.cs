@@ -18,6 +18,7 @@ namespace WT.MobileWebService.Installers
                 .AddEntityFrameworkStores<DataContext>();
 
             services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<IIdentityService, IdentityService>();
         }
     }
 }
