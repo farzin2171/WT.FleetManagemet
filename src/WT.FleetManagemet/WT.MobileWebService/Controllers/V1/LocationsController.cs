@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WT.MobileWebService.Contract.V1;
 using WT.MobileWebService.Contract.V1.Requests;
 using WT.MobileWebService.Domain;
+using WT.MobileWebService.Extentions;
 
 namespace WT.MobileWebService.Controllers.V1
 {
@@ -33,7 +33,8 @@ namespace WT.MobileWebService.Controllers.V1
             {
                 Lat = location.Lat,
                 Lon = location.Lon,
-                RecivedDate = DateTime.UtcNow
+                RecivedDate = DateTime.UtcNow,
+                UserId=HttpContext.GetUserId()
             });
             return Ok();
         }
