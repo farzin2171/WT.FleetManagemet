@@ -1,2 +1,6 @@
 Add-Migration AddedLocation
 update-database -verbose
+
+
+dotnet ef migrations add "added_userId_toLocation"
+
