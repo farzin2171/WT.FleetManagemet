@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.MobileWebService", "WT.MobileWebService\WT.MobileWebService.csproj", "{97CA1019-43E7-472C-9853-392C1293D1B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.MobileWebService", "WT.MobileWebService\WT.MobileWebService.csproj", "{97CA1019-43E7-472C-9853-392C1293D1B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.MobileWebService.Contract", "WT.MobileWebService.Contract\WT.MobileWebService.Contract.csproj", "{8565AA30-B72C-42D2-8757-C371A455212D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.MobileWebService.Contract", "WT.MobileWebService.Contract\WT.MobileWebService.Contract.csproj", "{8565AA30-B72C-42D2-8757-C371A455212D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4179D545-C9C1-4D14-8C8C-CF1E93AE561C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.MobileWebServices.IntegrationTests", "Tests\WT.MobileWebServices.IntegrationTests\WT.MobileWebServices.IntegrationTests.csproj", "{249D7A6D-529E-4634-9D62-07D1CCADE041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{8565AA30-B72C-42D2-8757-C371A455212D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8565AA30-B72C-42D2-8757-C371A455212D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8565AA30-B72C-42D2-8757-C371A455212D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{249D7A6D-529E-4634-9D62-07D1CCADE041} = {4179D545-C9C1-4D14-8C8C-CF1E93AE561C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {165D0A9F-4DA9-411B-BC8E-2D0A9CDBCDD5}

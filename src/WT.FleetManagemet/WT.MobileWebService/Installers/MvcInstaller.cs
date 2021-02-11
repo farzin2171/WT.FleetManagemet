@@ -42,6 +42,14 @@ namespace WT.MobileWebService.Installers
                 x.SaveToken = true;
                 x.TokenValidationParameters = tokenValidationParameters;
             });
+
+            services.AddAuthorization(options=>
+            {
+                options.AddPolicy("CommandCeneter", builder =>
+                {
+                    builder.RequireClaim("commandCeneter.admin", "true");
+                });
+            });
             
         }
     }

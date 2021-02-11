@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,12 +16,15 @@ namespace WT.MobileWebService.Controllers.V1
     public class LocationsController : ControllerBase
     {
         private readonly ILocationService _locationService;
-        public LocationsController(ILocationService locationService)
+        private readonly IMapper _mapper;
+        public LocationsController(ILocationService locationService, IMapper mapper)
         {
             _locationService = locationService;
+            _mapper = mapper;
         }
 
         [HttpGet(ApiRoutes.Locations.GetByUserId)]
+        [Authorize(Policy = "commandCeneter.admin")]
         public IActionResult GetByUserId([FromRoute] Guid userId,[FromRoute] DateTime startDate,[FromRoute] DateTime endDate)
         {
             return Ok();
@@ -29,13 +33,9 @@ namespace WT.MobileWebService.Controllers.V1
         [HttpPost(ApiRoutes.Locations.Create)]
         public async Task<IActionResult> Create([FromBody] CreateLocationRequest location)
         {
-           await  _locationService.CreateAsync(new Location
-            {
-                Lat = location.Lat,
-                Lon = location.Lon,
-                RecivedDate = DateTime.UtcNow,
-                UserId=HttpContext.GetUserId()
-            });
+            var domainLocation = _mapper.Map<Location>(location);
+            domainLocation.UserId = HttpContext.GetUserId();
+            await  _locationService.CreateAsync(domainLocation);
             return Ok();
         }
     }

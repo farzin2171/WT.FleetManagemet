@@ -21,7 +21,7 @@ namespace WT.MobileWebService.Services
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly DataContext _context;
         public IdentityService(UserManager<IdentityUser> userManager,
-                               JwtOptions jwtOptions, 
+                               JwtOptions jwtOptions,
                                TokenValidationParameters tokenValidationParameters,
                                DataContext context)
         {
@@ -43,7 +43,7 @@ namespace WT.MobileWebService.Services
             };
 
             var userHasValidPassword = await _userManager.CheckPasswordAsync(user, password);
-            if(!userHasValidPassword)
+            if (!userHasValidPassword)
             {
                 return new AuthenticationResult
                 {
@@ -107,7 +107,7 @@ namespace WT.MobileWebService.Services
             await _context.SaveChangesAsync();
 
             var user = await _userManager.FindByIdAsync(validatedToken.Claims.Single(x => x.Type == "id").Value);
-            return  await GeneratAuthenticationResultAsync(user);
+            return await GeneratAuthenticationResultAsync(user);
         }
 
         public async Task<AuthenticationResult> RegisterAsync(string email, string password)
@@ -124,19 +124,23 @@ namespace WT.MobileWebService.Services
             var newUserId = Guid.NewGuid();
             var newUser = new IdentityUser
             {
-                Id=newUserId.ToString(),
+                Id = newUserId.ToString(),
                 Email = email,
                 UserName = email
             };
 
+           
+
             var createdUser = await _userManager.CreateAsync(newUser, password);
-            if(!createdUser.Succeeded)
+            if (!createdUser.Succeeded)
             {
                 return new AuthenticationResult
                 {
                     Errors = createdUser.Errors.Select(x => x.Description)
                 };
             }
+            //ToDo:must be extarcted
+            await _userManager.AddClaimAsync(newUser, new Claim("commandCeneter.admin", "true"));
 
             return await GeneratAuthenticationResultAsync(newUser);
         }
@@ -147,7 +151,7 @@ namespace WT.MobileWebService.Services
             try
             {
                 var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
-                if(!IsJwtWithSecurityAlgorithm(validatedToken))
+                if (!IsJwtWithSecurityAlgorithm(validatedToken))
                 {
                     return null;
                 }
@@ -158,7 +162,7 @@ namespace WT.MobileWebService.Services
                 //ToDo:Log
                 return null;
             }
-            
+
         }
         private bool IsJwtWithSecurityAlgorithm(SecurityToken validatedToken)
         {
@@ -169,15 +173,20 @@ namespace WT.MobileWebService.Services
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var claimes = new List<Claim>
             {
-                Subject = new ClaimsIdentity(new[]
-                {
                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email,user.Email),
                     new Claim("id",user.Id)
-                }),
+            };
+
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            claimes.AddRange(userClaims);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claimes),
                 Expires = DateTime.UtcNow.Add(_jwtOptions.TokenLifeTime),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -201,7 +210,7 @@ namespace WT.MobileWebService.Services
             {
                 Success = true,
                 Token = tokenHandler.WriteToken(token),
-                RefreshToken=refreshToken.Token
+                RefreshToken = refreshToken.Token
             };
         }
     }
