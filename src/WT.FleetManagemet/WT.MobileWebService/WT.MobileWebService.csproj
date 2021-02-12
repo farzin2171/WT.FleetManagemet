@@ -28,4 +28,8 @@
     <ProjectReference Include="..\WT.MobileWebService.Contract\WT.MobileWebService.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\SwaggerExamples\Responses\" />
+  </ItemGroup>
+
 </Project>

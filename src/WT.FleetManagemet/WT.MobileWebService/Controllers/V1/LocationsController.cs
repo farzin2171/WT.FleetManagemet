@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using WT.MobileWebService.Extentions;
 
 namespace WT.MobileWebService.Controllers.V1
 {
+    [Consumes("application/json")]
+    [Produces("application/hal+json")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class LocationsController : ControllerBase
@@ -29,7 +32,24 @@ namespace WT.MobileWebService.Controllers.V1
         {
             return Ok();
         }
-
+        /// <summary>
+        /// Accepet lates Vihecle location in the system
+        /// </summary>
+        /// <remarks>
+        /// This will Insert the latest location.
+        /// 
+        /// Sample request:
+        ///
+        ///     Post /api/v1/Locations
+        ///
+        /// </remarks>
+        /// <param name="location"></param>
+        /// <response code="401">The JWT is missing or incorrect.</response>  
+        /// <response code="403">The authorization is missing a permission</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [HttpPost(ApiRoutes.Locations.Create)]
         public async Task<IActionResult> Create([FromBody] CreateLocationRequest location)
         {
