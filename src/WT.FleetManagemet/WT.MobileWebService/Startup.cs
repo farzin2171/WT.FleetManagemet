@@ -23,7 +23,7 @@ namespace WT.MobileWebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
-            services.AddAutoMapper(typeof(Startup));
+            
             
         }
 

@@ -2,9 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
 using WT.MobileWebService.Options;
+using FluentValidation.AspNetCore;
+using WT.MobileWebService.Infrastructure.Filters;
 
 namespace WT.MobileWebService.Installers
 {
@@ -27,8 +28,14 @@ namespace WT.MobileWebService.Installers
             };
 
             services.AddSingleton(tokenValidationParameters);
+            
 
-            services.AddMvcCore()
+            services
+             .AddMvcCore(options=>
+             {
+                 options.Filters.Add<ValidationFilter>();
+             })
+             .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>())
              .AddRazorViewEngine();
 
             services.AddAuthentication(x =>
