@@ -7,13 +7,14 @@ using System;
 using System.Threading.Tasks;
 using WT.MobileWebService.Contract.V1;
 using WT.MobileWebService.Contract.V1.Requests;
+using WT.MobileWebService.Contract.V1.Responses;
 using WT.MobileWebService.Domain;
 using WT.MobileWebService.Extentions;
 
 namespace WT.MobileWebService.Controllers.V1
 {
     [Consumes("application/json")]
-    [Produces("application/hal+json")]
+    [Produces("application/json")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class LocationsController : ControllerBase
@@ -56,7 +57,12 @@ namespace WT.MobileWebService.Controllers.V1
             var domainLocation = _mapper.Map<Location>(location);
             domainLocation.UserId = HttpContext.GetUserId();
             await  _locationService.CreateAsync(domainLocation);
-            return Ok();
+            return Ok(new CreateLocationResponse
+            {
+                Id=domainLocation.Id,
+                Lat=domainLocation.Lat,
+                Lon=domainLocation.Lon
+            });
         }
     }
 }

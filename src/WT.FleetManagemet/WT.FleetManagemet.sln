@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.MobileWebService.Contrac
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4179D545-C9C1-4D14-8C8C-CF1E93AE561C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.MobileWebServices.IntegrationTests", "Tests\WT.MobileWebServices.IntegrationTests\WT.MobileWebServices.IntegrationTests.csproj", "{249D7A6D-529E-4634-9D62-07D1CCADE041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.MobileWebServices.IntegrationTests", "Tests\WT.MobileWebServices.IntegrationTests\WT.MobileWebServices.IntegrationTests.csproj", "{249D7A6D-529E-4634-9D62-07D1CCADE041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.FleetManagement.Sdk", "WT.FleetManagement.Sdk\WT.FleetManagement.Sdk.csproj", "{DAB1CF7F-A2E7-4442-A893-F3944507F283}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.FleetManagement.Sdk.Sample", "WT.FleetManagement.Sdk.Sample\WT.FleetManagement.Sdk.Sample.csproj", "{1A193149-8BD2-4C22-B3AF-5FE982729696}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,14 @@ Global
 		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{249D7A6D-529E-4634-9D62-07D1CCADE041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB1CF7F-A2E7-4442-A893-F3944507F283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB1CF7F-A2E7-4442-A893-F3944507F283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB1CF7F-A2E7-4442-A893-F3944507F283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB1CF7F-A2E7-4442-A893-F3944507F283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A193149-8BD2-4C22-B3AF-5FE982729696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A193149-8BD2-4C22-B3AF-5FE982729696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A193149-8BD2-4C22-B3AF-5FE982729696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A193149-8BD2-4C22-B3AF-5FE982729696}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
