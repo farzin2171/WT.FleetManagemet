@@ -19,6 +19,7 @@ namespace WT.MobileWebService.Installers
 
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.Decorate<ILocationService, LocationServiceSendMessage>();
         }
     }
 }
