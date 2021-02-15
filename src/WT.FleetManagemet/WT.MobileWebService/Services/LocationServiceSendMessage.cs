@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -12,14 +13,16 @@ namespace WT.MobileWebService.Services
     public class LocationServiceSendMessage : ILocationService
     {
         private readonly ILocationService _locationService;
-        public LocationServiceSendMessage(ILocationService locationService)
+        private readonly ILogger<LocationServiceSendMessage> _logger;
+        public LocationServiceSendMessage(ILocationService locationService, ILogger<LocationServiceSendMessage> logger)
         {
             _locationService = locationService;
+            _logger = logger;
         }
         public async Task CreateAsync(Location location)
         {
             var (messageBrokerPublisher, messageBrokerSubscriber) = MessageBrokerFactory.Create(MessageBrokerType.RabbitMq);
-            throw new EntityNotFoundException("test", "test");
+            _logger.LogError("Eroro from ");
             try
             {
                
