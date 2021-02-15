@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Linq;
+using WT.MobileWebService.Infrastructure.Extentions;
+using WT.MobileWebService.Infrastructure.Http;
 using WT.MobileWebService.Installers;
 
 namespace WT.MobileWebService
@@ -23,22 +25,25 @@ namespace WT.MobileWebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
-            
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseWhen(context => context.Request.IsApiRequest(), builder =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                builder.UseCustomExceptionHandler();
+            });
+
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
 
             app.UseRouting();
             app.UseHttpsRedirection();
