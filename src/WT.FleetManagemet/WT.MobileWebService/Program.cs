@@ -12,17 +12,12 @@ namespace WT.MobileWebService
 {
     public class Program
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+        public static void Main(string[] args) => BuildWebHost(args).RunTasks().Run();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHost BuildWebHost(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .ConfigureLogger()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .Build();
     }
 }
