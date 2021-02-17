@@ -1,14 +1,14 @@
-﻿using System;
-
-namespace WT.MobileWebService.Domain.Exceptions
+﻿namespace WT.MobileWebService.Domain.Exceptions
 {
-    public sealed class MessageBrokerTypeNotSupportedException : Exception
+    public sealed class MessageBrokerTypeNotSupportedException : CustomException
     {
-        public MessageBrokerTypeNotSupportedException() { }
-        public MessageBrokerTypeNotSupportedException(string message) : base(message) { }
-        public MessageBrokerTypeNotSupportedException(string message, Exception inner) : base(message, inner) { }
-        private MessageBrokerTypeNotSupportedException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        private const string MessageTemplate = "The MessageBrokerType: {0}, is not supported yet";
+
+        public string MessageBroker { get; }
+        public MessageBrokerTypeNotSupportedException(string messageBroker,string detail=""):
+            base(string.Format(MessageTemplate, messageBroker), detail)
+        {
+            MessageBroker = messageBroker;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace WT.MobileWebService.Infrastructure.MessageBroker
                        new MessageBrokerSubscriberRabbitMq(brokerConnectionStringRabbitMq, topicExchange, queueName));
             }
 
-            throw new MessageBrokerTypeNotSupportedException($"The MessageBrokerType: {messageBrokerType}, is not supported yet");
+            throw new MessageBrokerTypeNotSupportedException(messageBrokerType.ToString());
 
         }
     }

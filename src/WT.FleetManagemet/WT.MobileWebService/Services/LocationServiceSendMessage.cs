@@ -35,6 +35,10 @@ namespace WT.MobileWebService.Services
                                                          "corr_" + Guid.NewGuid().ToString("N")));
 
             }
+            catch(Exception exp)
+            {
+                var x = exp;
+            }
             finally
             {
                 messageBrokerPublisher.Dispose();
