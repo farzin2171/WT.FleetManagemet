@@ -2,13 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>3c36bcd1-eb23-4c4a-8d11-3cca5a289986</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Infrastructure\NewFolder\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
@@ -17,6 +11,5 @@
   <ItemGroup>
     <ProjectReference Include="..\WT.MessageBrokers\WT.MessageBrokers.csproj" />
   </ItemGroup>
-
 
 </Project>

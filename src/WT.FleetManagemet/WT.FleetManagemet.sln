@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.FleetManagement.Sdk.Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.MessageBrokers", "WT.MessageBrokers\WT.MessageBrokers.csproj", "{BF1CE73A-BB4E-42A8-8A35-D5069BBF8090}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.CommandCenter", "WT.CommandCenter\WT.CommandCenter.csproj", "{7609E4D0-3F36-4BAE-915C-922156FCDBCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.FleetDashboard", "WT.FleetDashboard\WT.FleetDashboard.csproj", "{D97BEF82-D337-4CA2-A0A4-AB73506BF96F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,10 @@ Global
 		{BF1CE73A-BB4E-42A8-8A35-D5069BBF8090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF1CE73A-BB4E-42A8-8A35-D5069BBF8090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1CE73A-BB4E-42A8-8A35-D5069BBF8090}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7609E4D0-3F36-4BAE-915C-922156FCDBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7609E4D0-3F36-4BAE-915C-922156FCDBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7609E4D0-3F36-4BAE-915C-922156FCDBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7609E4D0-3F36-4BAE-915C-922156FCDBCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D97BEF82-D337-4CA2-A0A4-AB73506BF96F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D97BEF82-D337-4CA2-A0A4-AB73506BF96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D97BEF82-D337-4CA2-A0A4-AB73506BF96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D97BEF82-D337-4CA2-A0A4-AB73506BF96F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
