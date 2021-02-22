@@ -22,6 +22,10 @@ namespace WT.MobileWebService.Installers
             services.AddStartupTask<InformationStartupTask>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<ICustomerInformationService, CustomerInformationService>();
+            services.AddScoped<IGenerateOrderRefrence, GenerateOrderRefrence>();
+
+
             services.Decorate<ILocationService, LocationServiceSendMessage>();
         }
     }

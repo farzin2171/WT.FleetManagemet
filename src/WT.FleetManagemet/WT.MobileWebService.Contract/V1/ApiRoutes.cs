@@ -12,7 +12,13 @@
             public const string Create = Base + "/Locations";
 
         }
-        
+
+        public static class CustomerInformation
+        {
+            public const string Create = Base + "/CustomerInformation";
+
+        }
+
         public static class Identity
         {
             public const string Login = Base + "/identity/login";

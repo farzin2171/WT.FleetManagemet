@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WT.MobileWebService.Data;
 
 namespace WT.MobileWebService.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210222023422_AddedEshopEntities_01")]
+    partial class AddedEshopEntities_01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,6 +307,9 @@ namespace WT.MobileWebService.Data.Migrations
                     b.Property<Guid>("DipatchId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("DispatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
@@ -313,7 +318,7 @@ namespace WT.MobileWebService.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DipatchId");
+                    b.HasIndex("DispatchId");
 
                     b.HasIndex("OrderId");
 
@@ -523,9 +528,7 @@ namespace WT.MobileWebService.Data.Migrations
                 {
                     b.HasOne("WT.MobileWebService.Domain.Dispatch", "Dispatch")
                         .WithMany()
-                        .HasForeignKey("DipatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DispatchId");
 
                     b.HasOne("WT.MobileWebService.Domain.Order", "Order")
                         .WithMany()
