@@ -8,6 +8,11 @@ namespace WT.MobileWebService.Domain
 {
     public sealed class Driver
     {
+        public Driver()
+        {
+            DriverStatus = DriverStatus.Ready;
+            ActionDate = DateTime.UtcNow;
+        }
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }

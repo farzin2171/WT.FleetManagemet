@@ -17,6 +17,10 @@ namespace WT.MobileWebService.Mapping
 
             CreateMap<Order, CreateOrderResponse>();
 
+            CreateMap<CreateDriverRequest, Driver>();
+            CreateMap<Driver, CreateDriverResponse>();
+
+
 
         }
     }

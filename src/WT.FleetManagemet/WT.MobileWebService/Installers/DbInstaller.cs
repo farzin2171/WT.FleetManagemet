@@ -25,8 +25,7 @@ namespace WT.MobileWebService.Installers
             services.AddScoped<ICustomerInformationService, CustomerInformationService>();
             services.AddScoped<IGenerateOrderRefrence, GenerateOrderRefrence>();
             services.AddScoped<IOrderService, OrderService>();
-
-
+            services.AddScoped<IDriverService, DriverService>();
 
             services.Decorate<ILocationService, LocationServiceSendMessage>();
         }

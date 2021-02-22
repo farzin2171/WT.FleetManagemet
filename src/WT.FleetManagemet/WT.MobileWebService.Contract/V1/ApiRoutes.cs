@@ -15,12 +15,20 @@
 
         public static class CustomerInformations
         {
-            public const string Create = Base + "/CustomerInformation";
+            public const string Create = Base + "/CustomerInformations";
 
         }
         public static class Orders
         {
-            public const string Create = Base + "/Order/{customerEmail}";
+            public const string Create = Base + "/Orders/{customerEmail}";
+
+        }
+        public static class Drivers
+        {
+            public const string Create = Base + "/Drivers";
+            public const string Update = Base + "/Drivers";
+            public const string GetByPhoneNumber = Base + "/Drivers/{phoneNumber}";
+
 
         }
 
