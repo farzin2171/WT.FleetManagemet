@@ -2,6 +2,8 @@
 using WT.MobileWebService.Data;
 using WT.MobileWebService.Domain;
 using System.Linq;
+using System;
+using WT.MobileWebService.Domain.Exceptions;
 
 namespace WT.MobileWebService.Services
 {
@@ -15,6 +17,11 @@ namespace WT.MobileWebService.Services
         }
         public async Task CreateAsync(CustomerInformation customerInformation)
         {
+            var customer = _dataContext.CustomerInformations.FirstOrDefault(c => c.Email.ToLower() == customerInformation.Email.ToLower());
+            if(customer !=null)
+            {
+                throw new EntityAlreadyExistException("customerInformation", customerInformation.Email);
+            }
             await _dataContext.CustomerInformations.AddAsync(customerInformation);
             await _dataContext.SaveChangesAsync();
         }

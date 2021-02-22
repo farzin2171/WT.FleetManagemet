@@ -18,40 +18,41 @@ namespace WT.MobileWebService.Controllers.V1
     [Produces("application/json")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-    public class CustomerInformationsController: ControllerBase
+    public class OrdersController: ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly ICustomerInformationService _customerInformationService;
-        public CustomerInformationsController(IMapper mapper, ICustomerInformationService customerInformationService)
+        private readonly IOrderService _orderService;
+
+        public OrdersController(IMapper mapper, IOrderService orderService)
         {
             _mapper = mapper;
-            _customerInformationService = customerInformationService;
+            _orderService = orderService;
         }
 
         /// <summary>
-        /// Creates new customer in the system
+        /// Creates new order in the system
         /// </summary>
         /// <remarks>
         /// 
         /// Sample request:
         ///
-        ///     Post /api/v1/CustomerInformations
+        ///     Post /api/v1/Orders/{customerEmail}
         ///
         /// </remarks>
-        /// <param name="input"></param>
+        /// <param name="customerEmail"></param>
         /// <response code="401">The JWT is missing or incorrect.</response>  
         /// <response code="403">The authorization is missing a permission</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [HttpPost(ApiRoutes.CustomerInformations.Create)]
-        public async Task<IActionResult> Create([FromBody] CreateCustomerInformationRequest input)
+        [HttpPost(ApiRoutes.Orders.Create)]
+        public async Task<IActionResult> Create([FromRoute] string customerEmail)
         {
-            var domainData = _mapper.Map<CustomerInformation>(input);
-            domainData.UserId = HttpContext.GetUserId();
-            await _customerInformationService.CreateAsync(domainData);
-            return Ok(_mapper.Map<CreateCustomerInformationResponse>(domainData));
+            
+            var userId = HttpContext.GetUserId();
+            var order= await _orderService.CreateAsync(customerEmail, userId);
+            return Ok(_mapper.Map<CreateOrderResponse>(order));
         }
     }
 }

@@ -11,8 +11,12 @@ namespace WT.MobileWebService.Mapping
         public DomainToResponseProfile()
         {
             CreateMap<CreateLocationRequest, Location>();
+
             CreateMap<CreateCustomerInformationRequest, CustomerInformation>();
             CreateMap<CustomerInformation, CreateCustomerInformationResponse>();
+
+            CreateMap<Order, CreateOrderResponse>();
+
 
         }
     }

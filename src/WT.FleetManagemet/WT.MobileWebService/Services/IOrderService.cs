@@ -7,7 +7,7 @@ namespace WT.MobileWebService.Services
 {
     public interface IOrderService
     {
-        Task<Order> CreateAsync(Guid CustomerId);
-        Task<Order> UpdateStatus(OrderStatus orderStatus);
+        Task<Order> CreateAsync(string customerEmail,string userId);
+        Task<Order> UpdateStatusAsync(string orderRef,OrderStatus orderStatus,string userId);
     }
 }

@@ -13,9 +13,14 @@
 
         }
 
-        public static class CustomerInformation
+        public static class CustomerInformations
         {
             public const string Create = Base + "/CustomerInformation";
+
+        }
+        public static class Orders
+        {
+            public const string Create = Base + "/Order/{customerEmail}";
 
         }
 
