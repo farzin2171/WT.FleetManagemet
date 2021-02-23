@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WT.MobileWebService.Data;
 using WT.MobileWebService.Infrastructure.Extentions;
 using WT.MobileWebService.Infrastructure.StartupTasks;
+using WT.MobileWebService.Infrastructure.WorkerServices;
 using WT.MobileWebService.Services;
 
 namespace WT.MobileWebService.Installers
@@ -28,6 +29,8 @@ namespace WT.MobileWebService.Installers
             services.AddScoped<IDriverService, DriverService>();
 
             services.Decorate<ILocationService, LocationServiceSendMessage>();
+
+            services.AddHostedService<MessageBrokerPubSubWorker>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WT.MobileWebService.Data;
@@ -33,6 +34,16 @@ namespace WT.MobileWebService.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Driver> GetInserted(int limit)
+        {
+            return _dataContext.Drivers.Where(c => c.EntityStatus == EntityStatus.IsNew).OrderBy(c => c.ActionDate).Take(limit);
+        }
+
+        public IEnumerable<Driver> GetUpdated(int limit)
+        {
+            return _dataContext.Drivers.Where(c => c.EntityStatus == EntityStatus.IsUpdated).OrderBy(c=>c.ActionDate).Take(limit);
+        }
+
         public async Task<Driver> UpdateAsync(Driver driver)
         {
             if (_dataContext.Drivers.FirstOrDefault(c => c.PhoneNumber == driver.PhoneNumber) != null)
@@ -54,15 +65,16 @@ namespace WT.MobileWebService.Services
             return existDriver;
         }
 
-        public  async Task UpdateStatus(DriverStatus driverStatus,string phoneNumber)
+        public  async Task UpdateStatus(string driverStatus,string phoneNumber)
         {
             var existDriver = _dataContext.Drivers.FirstOrDefault(c => c.PhoneNumber==phoneNumber);
             if (existDriver == null)
             {
                 throw new EntityNotFoundException("driver", phoneNumber);
             }
-
-            existDriver.DriverStatus = driverStatus;
+            Enum.TryParse(driverStatus, out DriverStatus enumDriverStatus);
+            
+            existDriver.DriverStatus = enumDriverStatus;
             existDriver.EntityStatus = EntityStatus.IsUpdated;
             existDriver.ActionDate = DateTime.UtcNow;
 

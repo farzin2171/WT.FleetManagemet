@@ -27,6 +27,7 @@
         {
             public const string Create = Base + "/Drivers";
             public const string Update = Base + "/Drivers";
+            public const string UpdateStatus = Base + "/Drivers/driverPhone/{driverPhone}/driverStatus/{driverStatus}";
             public const string GetByPhoneNumber = Base + "/Drivers/{phoneNumber}";
 
 
