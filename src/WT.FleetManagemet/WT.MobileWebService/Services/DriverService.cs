@@ -44,12 +44,21 @@ namespace WT.MobileWebService.Services
             return _dataContext.Drivers.Where(c => c.EntityStatus == EntityStatus.IsUpdated).OrderBy(c=>c.ActionDate).Take(limit);
         }
 
+        public async Task SetIstransfered(Guid id)
+        {
+            var existDriver = _dataContext.Drivers.FirstOrDefault(c => c.Id == id);
+            if (existDriver == null)
+            {
+                throw new EntityNotFoundException("driver", id.ToString());
+            }
+            existDriver.EntityStatus = EntityStatus.IsUpdated;
+            existDriver.ActionDate = DateTime.UtcNow;
+
+            await _dataContext.SaveChangesAsync();
+        }
+
         public async Task<Driver> UpdateAsync(Driver driver)
         {
-            if (_dataContext.Drivers.FirstOrDefault(c => c.PhoneNumber == driver.PhoneNumber) != null)
-            {
-                throw new EntityAlreadyExistException("Driver", "PhoneNumber");
-            }
             var existDriver = _dataContext.Drivers.FirstOrDefault(c => c.Id == driver.Id);
             if (existDriver==null)
             {
@@ -64,6 +73,8 @@ namespace WT.MobileWebService.Services
             await _dataContext.SaveChangesAsync();
             return existDriver;
         }
+
+
 
         public  async Task UpdateStatus(string driverStatus,string phoneNumber)
         {

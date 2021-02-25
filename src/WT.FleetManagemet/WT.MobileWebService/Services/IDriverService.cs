@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WT.MobileWebService.Domain;
-using WT.MobileWebService.Domain.Enums;
 
 namespace WT.MobileWebService.Services
 {
@@ -12,6 +11,7 @@ namespace WT.MobileWebService.Services
         Task<Driver> CreateAsync(Driver driver);
         Task<Driver> UpdateAsync(Driver driver);
         Task UpdateStatus(string driverStatus,string phoneNumber);
+        Task SetIstransfered(Guid id);
         IEnumerable<Driver> GetUpdated(int limit);
         IEnumerable<Driver> GetInserted(int limit);
 

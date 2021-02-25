@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using WT.MessageBrokers;
+using WT.MobileWebService.Domain;
 using WT.MobileWebService.Infrastructure.MessageBroker;
 using WT.MobileWebService.Services;
 
@@ -50,8 +51,8 @@ namespace WT.MobileWebService.Infrastructure.WorkerServices
 
         private async Task CheckAndPublishNewDriversAsync()
         {
-            
 
+            List<Driver> updatedDrivers=new List<Driver>();
             using (var scope = Services.CreateScope())
             {
                 var driverService =
@@ -59,7 +60,7 @@ namespace WT.MobileWebService.Infrastructure.WorkerServices
                         .GetRequiredService<IDriverService>();
 
                 var newDrivers = driverService.GetInserted(100);
-                if (newDrivers == null)
+                if (!newDrivers.Any())
                 {
                     return ;
                 }
@@ -72,13 +73,24 @@ namespace WT.MobileWebService.Infrastructure.WorkerServices
                                                              "application/json",
                                                              "MobileWebServices",
                                                              "corr_" + Guid.NewGuid().ToString("N")));
-
+                    updatedDrivers.Add(driver);
                 }
                 _logger.LogDebug($"CheckAndPublishNewDriversAsync found {newDrivers.Count()}.");
 
             }
 
-            
+            using (var scope = Services.CreateScope())
+            {
+                var driverService =
+                    scope.ServiceProvider
+                        .GetRequiredService<IDriverService>();
+
+                foreach (var driver in updatedDrivers)
+                {
+                    await driverService.SetIstransfered(driver.Id);   
+                }
+            }
+
         }
 
        

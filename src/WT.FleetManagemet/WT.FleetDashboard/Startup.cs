@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WT.FleetDashboard.Infrastructure.Hubs;
 using WT.FleetDashboard.Infrastructure.WorkerServices;
+using WT.FleetDashboard.Services;
 
 namespace WT.FleetDashboard
 {
@@ -30,6 +32,11 @@ namespace WT.FleetDashboard
                 hubOptions.EnableDetailedErrors = true;
             });
             services.AddHostedService<MessageBrokerPubSubWorker>();
+            services.AddTransient<IDriverService, DriverService>();
+            services.AddSingleton<IMongoClient, MongoClient>(s =>
+            {
+                return new MongoClient("mongodb+srv://EquisoftDemo:EquisoftDemo@suppervisor.izm6p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            });
             services.AddControllersWithViews();
         }
 

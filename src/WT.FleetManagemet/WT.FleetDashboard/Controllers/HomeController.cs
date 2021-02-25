@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WT.FleetDashboard.Models;
+using WT.FleetDashboard.Services;
 
 namespace WT.FleetDashboard.Controllers
 {
