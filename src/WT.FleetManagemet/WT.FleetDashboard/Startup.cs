@@ -35,7 +35,7 @@ namespace WT.FleetDashboard
             services.AddTransient<IDriverService, DriverService>();
             services.AddSingleton<IMongoClient, MongoClient>(s =>
             {
-                return new MongoClient("mongodb+srv://EquisoftDemo:EquisoftDemo@suppervisor.izm6p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+                return new MongoClient("mongodb+srv://admin:Admin123@suppervisor.izm6p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             });
             services.AddControllersWithViews();
         }

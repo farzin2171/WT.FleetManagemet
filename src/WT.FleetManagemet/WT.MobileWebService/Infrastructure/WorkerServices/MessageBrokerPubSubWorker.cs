@@ -71,6 +71,7 @@ namespace WT.MobileWebService.Infrastructure.WorkerServices
                     await _driverPublisher.Publish(new Message(body,
                                                              Guid.NewGuid().ToString("N"),
                                                              "application/json",
+                                                             MessageBrokerConstants.MESSAGE_TYPE_DRIVER_CREATED, 
                                                              "MobileWebServices",
                                                              "corr_" + Guid.NewGuid().ToString("N")));
                     updatedDrivers.Add(driver);

@@ -21,7 +21,7 @@ namespace WT.FleetDashboard.Services
 
         public async Task InsertAsync(Driver driver)
         {
-            await _Collection.InsertOneAsync(driver);
+                await _Collection.InsertOneAsync(driver);
         }
     }
 }

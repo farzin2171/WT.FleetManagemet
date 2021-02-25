@@ -60,6 +60,7 @@ namespace WT.MessageBrokers.RabitMQ
                 var message = new Message(body: ea.Body.ToArray(),
                     messageId: ea.BasicProperties.MessageId,
                     contentType: ea.BasicProperties.ContentType,
+                    messageType:ea.BasicProperties.Type,
                     applicationId: ea.BasicProperties.AppId,
                     correlationId: ea.BasicProperties.CorrelationId,
                     creationDateTime: creationDateTime);

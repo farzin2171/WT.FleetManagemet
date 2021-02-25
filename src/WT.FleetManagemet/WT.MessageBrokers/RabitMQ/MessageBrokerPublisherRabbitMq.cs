@@ -46,6 +46,7 @@ namespace WT.MessageBrokers.RabitMQ
                 properties.ContentType = message.ContentType;
                 properties.MessageId = message.MessageId;
                 properties.AppId = message.ApplicationId;
+                properties.Type = message.MessageType;
                 properties.CorrelationId = message.CorrelationId;
 
                 var propertiesDictionary = new Dictionary<string, object>();
