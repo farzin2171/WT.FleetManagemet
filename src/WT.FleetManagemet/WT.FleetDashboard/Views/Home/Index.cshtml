@@ -2,12 +2,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">You are monitoring your fleet</h1>
-    <h4 id="messageCount"></h4>
-    <div id="googleMap" style="width:100%;height:600px;"></div>
-</div>
+@section scripts{ 
+    <script>
+     "use strict"
 
+     const signalrConnection = new signalR.HubConnectionBuilder()
+    .withUrl("/messagebroker")
+    .build();
+
+    signalrConnection.start().then(function () {
+        console.log("SignalR Hub Connected");
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+        signalrConnection.on("onDriverRecived", function (driver) {
+            console.log(driver);
+            onNewDriver(driver);
+        });
+        var app = new Vue({
+            el: '#driver-list',
+            data: {
+                title: 'Drivera list',
+                loading: true,
+                drivers:[]
+            },
+            mounted: function () {
+                console.log('mounted');
+                fetch('/api/drivers')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        this.drivers = data;
+                        this.loading = false;
+                    });
+            },
+            methods: {
+                onNewDriver: function (driver) {
+                    this.drivers.push(driver);
+                }
+            }
+
+        });
+    </script>
+}
+<div id="app">
+    <div class="text-center" id="driver-list">
+        <h2>{{title}}</h2>
+        <div v-if="drivers.length > 0">
+            <p v-for="driver in drivers">
+                {{driver.name}}-{{driver.family}}
+            </p>
+        </div>
+    </div>
+</div>
 
 
 

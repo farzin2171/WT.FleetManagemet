@@ -32,13 +32,13 @@ namespace WT.FleetDashboard.Infrastructure.WorkerServices
         private MessageBrokerSubscriberBase _messageBrokerSubscriber = MessageBrokerFactory.CreateSubscriber(MessageBrokerType.RabbitMq,
                                                                                                              MessageBrokerConstants.DRIVER_CREATE_EXCHANGE,
                                                                                                              MessageBrokerConstants.DRIVER_CREATE_QUENAME);
-        private IHubContext<MessageBrokerHub> _hubContext;
+        
 
         public IServiceProvider Services { get; }
 
-        public MessageBrokerPubSubWorker(IHubContext<MessageBrokerHub> hubContext, IServiceProvider services)
+        public MessageBrokerPubSubWorker( IServiceProvider services)
         {
-            _hubContext = hubContext;
+            
             Services = services;
         }
 

@@ -21,6 +21,10 @@
         "jquery.js",
         "jquery.min.map"
       ]
+    },
+    {
+      "library": "vue@3.0.6",
+      "destination": "wwwroot/lib/Vue"
     }
   ]
 }

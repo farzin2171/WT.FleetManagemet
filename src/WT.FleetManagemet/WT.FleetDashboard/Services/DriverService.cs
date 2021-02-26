@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WT.FleetDashboard.DTOs;
+using MongoDB.Driver.Linq;
 
 namespace WT.FleetDashboard.Services
 {
@@ -14,9 +15,10 @@ namespace WT.FleetDashboard.Services
             var database = mongoClient.GetDatabase("Dashboard");
             _Collection = database.GetCollection<Driver>("Drivers");
         }
-        public Task<IEnumerable<Driver>> GetAllAsync()
+        public async Task<IEnumerable<Driver>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return( _Collection.AsQueryable().ToList());
+            
         }
 
         public async Task InsertAsync(Driver driver)
