@@ -2,33 +2,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-@section scripts{ 
+@section scripts{
     <script>
-     "use strict"
-
-     const signalrConnection = new signalR.HubConnectionBuilder()
-    .withUrl("/messagebroker")
-    .build();
-
-    signalrConnection.start().then(function () {
-        console.log("SignalR Hub Connected");
-    }).catch(function (err) {
-        return console.error(err.toString());
-    });
-
-        signalrConnection.on("onDriverRecived", function (driver) {
-            console.log(driver);
-            onNewDriver(driver);
-        });
         var app = new Vue({
             el: '#driver-list',
             data: {
                 title: 'Drivera list',
                 loading: true,
-                drivers:[]
+                signalrConnection: "",
+                drivers: []
+            },
+            created: function () {
+                console.log('created');
+                this.signalrConnection = new signalR.HubConnectionBuilder()
+                    .withUrl("/messagebroker")
+                    .build();
+                this.signalrConnection.start().then(function () {
+                    console.log("SignalR Hub Connected");
+                }).catch(function (err) {
+                    return console.error(err.toString());
+                });
+
+                //var thisVue = this;
+                //thisVue.signalrConnection.on("onDriverRecived", function (driver) {
+                //    debugger;
+                //    console.log(driver);
+                //    console.log(thisVue.drivers);
+
+                //});
             },
             mounted: function () {
                 console.log('mounted');
+
+                var thisVue = this;
+                thisVue.signalrConnection.on("onDriverRecived", function (driver) {
+                    debugger;
+                    console.log(driver);
+                    thisVue.drivers.push(driver);
+
+
+                });
+
                 fetch('/api/drivers')
                     .then((res) => res.json())
                     .then((data) => {
@@ -46,13 +60,18 @@
         });
     </script>
 }
-<div id="app">
-    <div class="text-center" id="driver-list">
-        <h2>{{title}}</h2>
+<div id="app" class="container">
+   
+    <div class="columns" id="driver-list">
+        <div v-if="loading">
+            <div class="pageloader is-bottom-to-top is-active"><span class="title">Pageloader</span></div>
+        </div>
         <div v-if="drivers.length > 0">
-            <p v-for="driver in drivers">
-                {{driver.name}}-{{driver.family}}
-            </p>
+            <table class="table">
+                <tr v-for="driver in drivers">
+                    <td> {{driver.name}}-{{driver.family}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
